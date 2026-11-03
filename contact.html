@@ -3,438 +3,186 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us - Maxwin</title>
+  <title>Contact Us | Maxwin Multitec Solutions</title>
+  <meta name="description" content="Contact Maxwin Multitec Solutions in Chennai for Aadhaar biometric devices, quotes and smart school solutions. Call, email or send us a message.">
+  <meta name="theme-color" content="#0c1538">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="css/styles.css" />
-  <style>
-    /* Contact Page Specific Styles */
-    .contact-hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-      text-align: center;
-      padding: 6rem 1.5rem;
-      margin-bottom: 4rem;
-    }
-    
-    .contact-hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1.5rem;
-      color: white;
-    }
-    
-    .contact-hero p {
-      font-size: 1.25rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-      color: rgba(255, 255, 255, 0.9);
-    }
-    
-    .contact-section {
-      padding: 4rem 0;
-    }
-    
-    .card-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
-    }
-    
-    .contact-card {
-      background: white;
-      border-radius: 1rem;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .contact-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    }
-    
-    .contact-icon {
-      width: 70px;
-      height: 70px;
-      background: var(--primary-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.5rem;
-      color: white;
-      font-size: 1.5rem;
-      transition: all 0.3s ease;
-    }
-    
-    .contact-card:hover .contact-icon {
-      background: var(--primary);
-      transform: rotateY(180deg);
-    }
-    
-    .contact-title {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      color: var(--text);
-    }
-    
-    .contact-details {
-      color: var(--text-light);
-      line-height: 1.7;
-    }
-    
-    @media (max-width: 768px) {
-      .contact-hero h1 {
-        font-size: 2.5rem;
-      }
-      
-      .card-container {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="icon" type="image/png" href="images/logos.png">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- NAVBAR -->
-  <header class="navbar">
+  <!-- HEADER -->
+  <header class="site-header">
     <div class="container">
-      <a href="index.html" class="logo-container">
-        <img src="images/logos.png" alt="Maxwin Logo" class="logo">
-        <span class="logo-text">Maxwin<span class="highlight">Multitec</span></span>
+      <a href="index.html" class="brand" aria-label="Maxwin Multitec Solutions — home">
+        <img src="images/logos.png" alt="" width="68" height="44">
+        <span class="brand-text">
+          <strong>Maxwin</strong>
+          <small>Multitec Solutions</small>
+        </span>
       </a>
-      
-      <div class="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      
-      <nav class="nav-menu">
-        <ul class="nav-links">
-          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="products.html"><i class="fas fa-boxes"></i> Products</a></li>
-          <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
-          <li><a href="#" class="btn btn-primary"><i class="fas fa-phone-alt"></i> Get a Quote</a></li>
-        </ul>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+        <a href="contact.html#contact-form" class="btn btn-primary btn-sm">Get a Quote</a>
       </nav>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="contact-hero">
-    <div class="container">
-      <h1>Get in Touch</h1>
-      <p>We'd love to hear from you. Reach out to us for any inquiries or to learn more about our biometric solutions.</p>
-    </div>
-  </section>
+  <main id="main">
 
-  <!-- CONTACT SECTION -->
-  <section class="contact-section">
-    <div class="container">
-      <div class="section-header">
-        <h2>Contact Information</h2>
-        <p>Feel free to contact us using any of the following methods</p>
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a> <i class="fas fa-chevron-right" style="font-size:.65rem"></i> <span>Contact</span></nav>
+        <h1>Get in touch</h1>
+        <p>Questions about our biometric solutions, or need a quote? Reach out and our team will get back to you.</p>
       </div>
-      
-      <div class="card-container">
-        <!-- Address Card -->
-        <div class="contact-card">
-          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-          <div class="contact-title">Our Location</div>
-          <div class="contact-details">
-            No 3 S.K. Apartments, 778 - Munusamy Salai,<br>West K.K. Nagar,<br>Chennai - 600 078, Tamil Nadu, India
-          </div>
-          <a href="https://maps.google.com" target="_blank" class="btn btn-outline mt-3">
-            <i class="fas fa-directions"></i> View on Map
-          </a>
-        </div>
-
-        <!-- Contact Card -->
-        <div class="contact-card">
-          <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-          <div class="contact-title">Contact Us</div>
-          <div class="contact-details">
-            <p><i class="fas fa-phone"></i> <a href="tel:+919362118686"> +91 93621 18686 </a></p>
-            <p><i class="fas fa-phone-alt"></i> <a href="tel:04442668688">+91 44 4266 8688</a></p>
-            <p><i class="fas fa-envelope"></i> <a href="mailto:maxwinmts@gmail.com">maxwinmts@gmail.com</a></p>
-            <div class="social-links mt-3">
-              <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Business Hours -->
-        <div class="contact-card">
-          <div class="contact-icon"><i class="far fa-clock"></i></div>
-          <div class="contact-title">Business Hours</div>
-          <div class="contact-details">
-            <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
-            <p><strong>Saturday:</strong> 10:00 AM - 4:00 PM</p>
-            <p><strong>Sunday:</strong> Closed</p>
-          </div>
-          <div class="mt-3">
-            <a href="#contact-form" class="btn btn-primary">
-              <i class="fas fa-paper-plane"></i> Send us a Message
-            </a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Contact Form -->
-      <div id="contact-form" class="contact-form-container">
-        <div class="section-header">
-          <h2>Send us a Message</h2>
-          <p>Fill out the form below and we'll get back to you as soon as possible</p>
-        </div>
-        
-        <form id="contactForm" class="contact-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Full Name <span class="required">*</span></label>
-              <input type="text" id="name" name="name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address <span class="required">*</span></label>
-              <input type="email" id="email" name="email" required>
-            </div>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" name="phone">
-            </div>
-            <div class="form-group">
-              <label for="subject">Subject</label>
-              <input type="text" id="subject" name="subject">
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Your Message <span class="required">*</span></label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          
-          <div id="form-message" class="form-message"></div>
-          <button type="submit" class="btn btn-primary" id="submit-button">
-            <i class="fas fa-paper-plane"></i> Send Message
-          </button>
-        </form>
-      </div>
-      
-      <!-- Map Section -->
-      <div class="map-container" style="margin: 3rem 0; border-radius: 1rem; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
-        <div style="display: flex; flex-direction: column;">
-          <!-- Map Header with Address -->
-          <div style="background: #f8f9fa; padding: 1.5rem; border-bottom: 1px solid #e5e7eb;">
-            <h3 style="margin: 0 0 1rem 0; color: #1e40af; display: flex; align-items: center; gap: 0.5rem;">
-              <i class="fas fa-map-marker-alt" style="color: #ef4444;"></i>
-              Our Location
-            </h3>
-            <p style="margin: 0; color: #4b5563; line-height: 1.6;">
-              No 3 S.K. Apartments, 778 - Munusamy Salai,<br>
-              West K.K. Nagar,<br>
-              Chennai - 600 078, Tamil Nadu, India
-            </p>
-            <a href="https://www.google.com/maps/dir//13.0621,80.2013/@13.0621,80.2013,17z/data=!4m2!4m1!3e0?entry=ttu" 
-               target="_blank" 
-               style="display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; color: #1e40af; text-decoration: none; font-weight: 500;">
-              <i class="fas fa-directions"></i> Get Directions
-            </a>
-          </div>
-          
-          <!-- Google Map Iframe -->
-          <div style="height: 400px; width: 100%;">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.1234567890123!2d80.2013!3d13.0621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDA3JzI0LjQiTiA4MMKwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin" 
-              width="100%" 
-              height="100%" 
-              style="border:0;" 
-              allowfullscreen="" 
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Maxwin Multitec Solutions Location">
-            </iframe>
-          </div>
-        </div>
-      </div>
-      
-      <!-- CTA SECTION -->
-      <section class="cta-section">
-        <div class="container">
-          <div class="cta-content">
-            <h2>Ready to Transform Your Business?</h2>
-            <p>Contact us today to learn more about our biometric solutions and how we can help secure your business.</p>
-            <div class="cta-buttons" style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
-              <a href="tel:+919362118686" class="btn btn-primary" style="padding: 0.75rem 2rem; font-weight: 600;">
-                <i class="fas fa-phone-alt"></i> Call Now: +91 93621 18686
-              </a>
-              <a href="mailto:info@maxwin.com" class="btn btn-outline" style="padding: 0.75rem 2rem; font-weight: 600;">
-                <i class="fas fa-envelope"></i> Email Us
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- FOOTER -->
-      <footer class="footer">
-        <div class="container">
-          <div class="footer-content">
-            <div class="footer-logo">
-              <a href="index.html" class="logo-container">
-                <img src="images/logos.png" alt="Maxwin Logo" class="logo" />
-                <span class="logo-text">Max<span class="highlight">win</span></span>
-              </a>
-              <p>Your trusted partner for biometric authentication solutions and Aadhaar enabled services.</p>
-              <div class="social-links">
-                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-              </div>
-            </div>
-            
-            <div class="footer-links">
-              <h3>Quick Links</h3>
-              <ul>
-                <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
-                <li><a href="products.html"><i class="fas fa-chevron-right"></i> Products</a></li>
-                <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
-                <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
-                <li><a href="#"><i class="fas fa-chevron-right"></i> Privacy Policy</a></li>
-              </ul>
-            </div>
-            
-            <div class="footer-links">
-              <h3>Our Products</h3>
-              <ul>
-                <li><a href="#"><i class="fas fa-fingerprint"></i> Fingerprint Scanners</a></li>
-                <li><a href="#"><i class="fas fa-eye"></i> IRIS Scanners</a></li>
-                <li><a href="#"><i class="fas fa-user"></i> Facial Recognition</a></li>
-                <li><a href="#"><i class="fas fa-id-card"></i> Aadhaar Solutions</a></li>
-                <li><a href="#"><i class="fas fa-mobile-alt"></i> Mobile Biometrics</a></li>
-              </ul>
-            </div>
-            
-            <div class="footer-contact">
-              <h3>Contact Info</h3>
-              <ul>
-                <li><i class="fas fa-map-marker-alt"></i> No 3 S.K. Apartments, 778 - Munusamy Salai, West K.K. Nagar, Chennai - 600 078</li>
-                <li><i class="fas fa-phone-alt"></i> +91 93621 18686</li>
-                <li><i class="fas fa-phone"></i> 044-4266 8688</li>
-                <li><i class="fas fa-envelope"></i> info@maxwin.com</li>
-                <li><i class="fas fa-envelope"></i> maxwinmts@gmail.com</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="footer-bottom">
-            <div class="copyright">
-              &copy; <span id="current-year">2025</span> Maxwin. All Rights Reserved.
-            </div>
-            <div class="footer-legal">
-              <a href="#">Privacy Policy</a>
-              <span>|</span>
-              <a href="#">Terms of Service</a>
-              <span>|</span>
-              <a href="#">Sitemap</a>
-            </div>
-          </div>
-        </div>
-      </footer>
-
-      <!-- Back to Top Button -->
-      <a href="#" class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-      </a>
-<a href="#" class="back-to-top">
-  <i class="fas fa-arrow-up"></i>
-</a>
-
-      <script>
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-          e.preventDefault();
-          
-          const form = e.target;
-          const submitButton = document.getElementById('submit-button');
-          const messageDiv = document.getElementById('form-message');
-          
-          // Disable the submit button
-          submitButton.disabled = true;
-          submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-          
-          // Clear previous messages
-          messageDiv.className = 'form-message';
-          messageDiv.textContent = '';
-          
-          try {
-            const formData = {
-              name: form.name.value,
-              email: form.email.value,
-              phone: form.phone.value,
-              subject: form.subject.value,
-              message: form.message.value
-            };
-            
-            const response = await fetch('http://localhost:5000/submit_contact', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(formData)
-            });
-            
-            const data = await response.json();
-            
-            if (data.success) {
-              messageDiv.className = 'form-message success';
-              messageDiv.textContent = data.message;
-              form.reset();
-            } else {
-              throw new Error(data.message || 'Failed to send message');
-            }
-          } catch (error) {
-            messageDiv.className = 'form-message error';
-            messageDiv.textContent = 'Error: ' + (error.message || 'Failed to send message. Please try again later.');
-            console.error('Error:', error);
-          } finally {
-            submitButton.disabled = false;
-            submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-          }
-        });
-      </script>
-      <script src="js/main.js"></script>
-      <script>
-        // Update copyright year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-        
-        // Back to top button
-        const backToTop = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-          if (window.pageYOffset > 300) {
-            backToTop.classList.add('show');
-          } else {
-            backToTop.classList.remove('show');
-          }
-        });
-        
-        backToTop.addEventListener('click', (e) => {
-          e.preventDefault();
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-      </script>
-
     </section>
 
-  </body>
+    <!-- FORM + DETAILS -->
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+
+          <div id="contact-form" class="card form-card">
+            <h2>Send us a message</h2>
+            <p>Fill in the form and we will respond as soon as possible.</p>
+
+            <form id="contactForm" data-endpoint="http://localhost:5000/submit_contact">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Full name <span class="required">*</span></label>
+                  <input type="text" id="name" name="name" autocomplete="name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email address <span class="required">*</span></label>
+                  <input type="email" id="email" name="email" autocomplete="email" placeholder="you@company.com" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="phone">Phone number</label>
+                  <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+91 …">
+                </div>
+                <div class="form-group">
+                  <label for="subject">Subject</label>
+                  <input type="text" id="subject" name="subject" placeholder="e.g. Quote for fingerprint scanners">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Your message <span class="required">*</span></label>
+                <textarea id="message" name="message" rows="5" placeholder="Tell us about your requirement…" required></textarea>
+              </div>
+
+              <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+              <button type="submit" class="btn btn-primary" id="submit-button"><i class="fas fa-paper-plane"></i> Send message</button>
+            </form>
+          </div>
+
+          <aside class="side">
+            <div class="card info-card reveal">
+              <h3><span class="icon-box"><i class="fas fa-phone-alt"></i></span> Call or email</h3>
+              <ul class="info-list">
+                <li><i class="fas fa-mobile-screen"></i><a href="tel:+919362118686">+91 93621 18686</a></li>
+                <li><i class="fas fa-phone"></i><a href="tel:+914442668688">+91 44 4266 8688</a></li>
+                <li><i class="fas fa-envelope"></i><a href="mailto:maxwinmts@gmail.com">maxwinmts@gmail.com</a></li>
+              </ul>
+            </div>
+
+            <div class="card info-card reveal" data-delay="1">
+              <h3><span class="icon-box"><i class="far fa-clock"></i></span> Business hours</h3>
+              <ul class="hours">
+                <li><span>Monday &ndash; Friday</span><strong>9:00 AM &ndash; 6:00 PM</strong></li>
+                <li><span>Saturday</span><strong>10:00 AM &ndash; 4:00 PM</strong></li>
+                <li><span>Sunday</span><strong>Closed</strong></li>
+              </ul>
+            </div>
+
+            <div class="card info-card reveal" data-delay="2">
+              <h3><span class="icon-box"><i class="fas fa-location-dot"></i></span> Visit us</h3>
+              <p>No 3 S.K. Apartments, 778 Munusamy Salai,<br>West K.K. Nagar, Chennai &ndash; 600 078,<br>Tamil Nadu, India</p>
+              <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=S.K.+Apartments+778+Munusamy+Salai+West+K.K.+Nagar+Chennai+600078" target="_blank" rel="noopener">Get directions <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </aside>
+        </div>
+
+        <!-- MAP -->
+        <div class="card map-card reveal">
+          <div class="map-top">
+            <div>
+              <h3><i class="fas fa-location-dot"></i> Our location</h3>
+              <p>West K.K. Nagar, Chennai &ndash; 600 078</p>
+            </div>
+            <a class="btn btn-outline btn-sm" href="https://www.google.com/maps/search/?api=1&amp;query=S.K.+Apartments+778+Munusamy+Salai+West+K.K.+Nagar+Chennai+600078" target="_blank" rel="noopener"><i class="fas fa-directions"></i> Open in Maps</a>
+          </div>
+          <iframe
+            src="https://maps.google.com/maps?q=Munusamy+Salai,+West+K.K.+Nagar,+Chennai+600078&amp;output=embed"
+            title="Maxwin Multitec Solutions location map"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <div class="footer-brand">
+        <a href="index.html"><img src="images/logos.png" alt="Maxwin logo"></a>
+        <p>Leading provider of Aadhaar-enabled biometric systems and smart school solutions across South India.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About us</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Solutions</h4>
+        <ul class="footer-links">
+          <li><a href="products.html#fingerprint">Fingerprint devices</a></li>
+          <li><a href="products.html#face">Face Aadhaar</a></li>
+          <li><a href="products.html#iris">Iris scanners</a></li>
+          <li><a href="index.html#solutions">Smart school solutions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul class="footer-contact">
+          <li><i class="fas fa-location-dot"></i><span>No 3 S.K. Apartments, 778 Munusamy Salai, West K.K. Nagar, Chennai &ndash; 600 078</span></li>
+          <li><i class="fas fa-phone"></i><span><a href="tel:+919362118686">+91 93621 18686</a><br><a href="tel:+914442668688">+91 44 4266 8688</a></span></li>
+          <li><i class="fas fa-envelope"></i><a href="mailto:maxwinmts@gmail.com">maxwinmts@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span data-year>2025</span> Maxwin Multitec Solutions. All rights reserved.</p>
+        <p>Aadhaar-enabled biometric &amp; smart school solutions</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <script src="js/main.js" defer></script>
+</body>
 </html>

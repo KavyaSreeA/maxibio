@@ -1,299 +1,161 @@
-// Main Application
-class MaxwinApp {
-  constructor() {
-    this.currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    this.initializeApp();
+// Maxwin Multitec Solutions — site behaviour
+(function () {
+  'use strict';
+
+  var $ = function (sel, root) { return (root || document).querySelector(sel); };
+  var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+
+  // ---------- Mobile navigation ----------
+  var header = $('.site-header');
+  var toggle = $('.nav-toggle');
+  var nav = $('#site-nav');
+
+  function setNav(open) {
+    if (!toggle || !nav) return;
+    nav.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
 
-  // Initialize the application
-  initializeApp() {
-    var self = this;
-    this.setupEventListeners();
-    this.handleNavigation();
-    this.initializeComponents();
-    this.setupScrollAnimations();
-    this.setupFormHandlers();
-    
-    // Add loaded class to body for transition effects
-    document.body.classList.add('loaded');
-    
-    // Add smooth scroll behavior for the entire document
-    document.documentElement.style.scrollBehavior = 'smooth';
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      setNav(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setNav(false);
+    });
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.site-header')) setNav(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') { setNav(false); toggle.focus(); }
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 900) setNav(false);
+    });
   }
 
-  // Setup event listeners
-  setupEventListeners() {
-    var self = this;
-    // Mobile menu toggle
-    var menuToggle = document.querySelector('.menu-toggle');
-    var navLinks = document.querySelector('.nav-links');
-    
-    if (menuToggle) {
-      menuToggle.addEventListener('click', function() {
-        menuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-      });
+  // ---------- Header shadow + back-to-top ----------
+  var backToTop = $('#backToTop');
+  function onScroll() {
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    if (header) header.classList.toggle('scrolled', y > 8);
+    if (backToTop) backToTop.classList.toggle('show', y > 600);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-      // Close mobile menu when clicking on a nav link
-      var navLinksList = document.querySelectorAll('.nav-links a');
-      for (var i = 0; i <navLinksList.length; i++) {
-        navLinksList[i].addEventListener('click', function() {
-          menuToggle.classList.remove('active');
-          navLinks.classList.remove('active');
-          document.body.style.overflow = '';
+  if (backToTop) {
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ---------- Scroll reveal ----------
+  var reveals = $$('.reveal');
+  if (reveals.length) {
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
         });
-      }
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach(function (el) { io.observe(el); });
+    } else {
+      reveals.forEach(function (el) { el.classList.add('in'); });
     }
   }
 
-  // Handle navigation and dynamic content loading
-  handleNavigation() {
-    // Smooth scrolling for anchor links
-    var anchorLinks = document.querySelectorAll('a[href^="#"]');
-    for (var i = 0; i < anchorLinks.length; i++) {
-      anchorLinks[i].addEventListener('click', function(e) {
-        e.preventDefault();
-        var targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        var targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 100,
-            behavior: 'smooth'
-          });
+  // ---------- Footer year ----------
+  $$('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+  // ---------- Product filters (products.html) ----------
+  var filterBar = $('.filters');
+  if (filterBar) {
+    var buttons = $$('.filter-btn', filterBar);
+    var cards = $$('.product');
+
+    var applyFilter = function (value) {
+      cards.forEach(function (card) {
+        var cats = (card.getAttribute('data-category') || '').split(/\s+/);
+        card.hidden = !(value === 'all' || cats.indexOf(value) !== -1);
+      });
+      buttons.forEach(function (btn) {
+        var on = btn.getAttribute('data-filter') === value;
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', String(on));
+      });
+    };
+
+    filterBar.hidden = false; // filters need JS, so only reveal them when it runs
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var value = btn.getAttribute('data-filter');
+        applyFilter(value);
+        if (history.replaceState) {
+          history.replaceState(null, '', value === 'all' ? location.pathname : '#' + value);
         }
       });
-    }
+    });
+
+    var initial = location.hash.replace('#', '');
+    var known = buttons.some(function (b) { return b.getAttribute('data-filter') === initial; });
+    applyFilter(known ? initial : 'all');
   }
 
-  // Initialize UI components
-  initializeComponents() {
-    // Initialize counters if they exist on the page
-    this.initializeCounters();
-    
-    // Initialize testimonials slider if it exists
-    if (document.querySelector('.testimonials-slider')) {
-      this.initializeTestimonials();
+  // ---------- Contact form (contact.html) ----------
+  var form = $('#contactForm');
+  if (form) {
+    var submitBtn = $('#submit-button');
+    var msg = $('#form-message');
+    var idleLabel = submitBtn.innerHTML;
+
+    // Pre-fill the subject when arriving from a product's "Enquire" button
+    var product = new URLSearchParams(location.search).get('product');
+    if (product && form.subject && !form.subject.value) {
+      form.subject.value = 'Enquiry: ' + product;
     }
-    
-    // Initialize product filters if on products page
-    if (this.currentPage === 'products.html') {
-      this.initializeProductFilters();
-    }
+
+    var show = function (type, text) {
+      msg.className = 'form-message ' + type;
+      msg.textContent = text;
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      show('', '');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+
+      var payload = {
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        phone: form.phone.value.trim(),
+        subject: form.subject.value.trim(),
+        message: form.message.value.trim()
+      };
+
+      fetch(form.getAttribute('data-endpoint'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (!data.success) throw new Error(data.message || 'Request failed');
+          show('success', data.message || 'Thank you! Your message has been sent. We will get back to you shortly.');
+          form.reset();
+        })
+        .catch(function () {
+          show('error', 'We could not send your message right now. Please call +91 93621 18686 or email maxwinmts@gmail.com.');
+        })
+        .then(function () {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = idleLabel;
+        });
+    });
   }
-
-  // Initialize counter animation
-  initializeCounters() {
-    var self = this;
-    var counters = document.querySelectorAll('.counter');
-    if (!counters.length) return;
-
-    function animateCounter(counterElement) {
-      var target = parseInt(counterElement.getAttribute('data-target'), 10);
-      var duration = 2000; // Animation duration in ms
-      var step = (target / (duration / 16)); // 60fps
-      var current = 0;
-      
-      function updateCounter() {
-        current += step;
-        
-        if (current < target) {
-          counterElement.textContent = Math.ceil(current);
-          requestAnimationFrame(updateCounter);
-        } else {
-          counterElement.textContent = target;
-        }
-      }
-      
-      updateCounter();
-    }
-
-    // Start counter when element is in viewport
-    var observer = new IntersectionObserver(function(entries) {
-      for (var i = 0; i < entries.length; i++) {
-        if (entries[i].isIntersecting) {
-          animateCounter(entries[i].target);
-          observer.unobserve(entries[i].target);
-        }
-      }
-    }, { threshold: 0.5 });
-
-    for (var i = 0; i < counters.length; i++) {
-      observer.observe(counters[i]);
-    }
-  }
-
-  // Initialize testimonials slider
-  initializeTestimonials() {
-    var self = this;
-    var currentSlide = 0;
-    var slides = document.querySelectorAll('.testimonial');
-    var totalSlides = slides.length;
-    
-    if (totalSlides <= 1) return;
-    
-    function updateSlider() {
-      for (var i = 0; i < slides.length; i++) {
-        slides[i].style.transform = 'translateX(' + (100 * (i - currentSlide)) + '%)';
-        slides[i].style.opacity = i === currentSlide ? '1' : '0';
-      }
-    }
-    
-    // Auto-advance slides
-    setInterval(function() {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSlider();
-    }, 5000);
-    
-    updateSlider();
-  }
-
-  // Initialize product filters
-  initializeProductFilters() {
-    var filterButtons = document.querySelectorAll('.filter-btn');
-    var productCards = document.querySelectorAll('.product-card');
-    var i, j;
-    
-    for (i = 0; i < filterButtons.length; i++) {
-      filterButtons[i].addEventListener('click', function() {
-        // Update active state
-        for (j = 0; j < filterButtons.length; j++) {
-          filterButtons[j].classList.remove('active');
-        }
-        this.classList.add('active');
-        
-        var filterValue = this.getAttribute('data-filter');
-        
-        // Filter products
-        for (j = 0; j < productCards.length; j++) {
-          if (filterValue === 'all' || productCards[j].getAttribute('data-category') === filterValue) {
-            productCards[j].style.display = 'flex';
-            (function(card) {
-              setTimeout(function() {
-                card.style.opacity = '1';
-              }, 10);
-            })(productCards[j]);
-          } else {
-            productCards[j].style.opacity = '0';
-            (function(card) {
-              setTimeout(function() {
-                card.style.display = 'none';
-              }, 300);
-            })(productCards[j]);
-          }
-        }
-      });
-    }
-  }
-
-  // Setup scroll animations
-  setupScrollAnimations() {
-    function animateOnScroll() {
-      var elements = document.querySelectorAll('.animate-on-scroll');
-      var i;
-      
-      for (i = 0; i < elements.length; i++) {
-        var elementTop = elements[i].getBoundingClientRect().top;
-        var elementVisible = 150;
-        
-        if (elementTop < window.innerHeight - elementVisible) {
-          elements[i].classList.add('animated');
-        }
-      }
-    }
-    
-    window.addEventListener('scroll', animateOnScroll);
-    animateOnScroll(); // Run once on page load
-  }
-
-  // Setup form handlers
-  setupFormHandlers() {
-    var self = this;
-    var contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        var formData = new FormData(contactForm);
-        var submitBtn = contactForm.querySelector('button[type="submit"]');
-        var originalBtnText = submitBtn.innerHTML;
-        
-        // Show loading state
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-        
-        // Simulate API call (replace with actual API endpoint)
-        setTimeout(function() {
-          try {
-            // Show success message
-            self.showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
-            contactForm.reset();
-          } catch (error) {
-            self.showNotification('Failed to send message. Please try again later.', 'error');
-          } finally {
-            // Reset button state
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalBtnText;
-          }
-        }, 1500);
-      });
-    }
-  }
-
-  // Show notification
-  showNotification(message, type) {
-    type = type || 'info';
-    var notification = document.createElement('div');
-    notification.className = 'notification ' + type;
-    notification.innerHTML = '<span class="notification-message">' + 
-      message + 
-      '</span><button class="notification-close">&times;</button>';
-    
-    document.body.appendChild(notification);
-    
-    // Auto-remove notification after 5 seconds
-    setTimeout(function() {
-      notification.classList.add('hide');
-      setTimeout(function() {
-        if (notification && notification.parentNode) {
-          notification.remove();
-        }
-      }, 300);
-    }, 5000);
-    
-    // Close button handler
-    var closeButton = notification.querySelector('.notification-close');
-    if (closeButton) {
-      closeButton.addEventListener('click', function() {
-        notification.classList.add('hide');
-        setTimeout(function() {
-          if (notification && notification.parentNode) {
-            notification.remove();
-          }
-        }, 300);
-      });
-    }
-  }
-}
-
-// Initialize the app when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', function() {
-  var app = new MaxwinApp();
-  
-  // Add page-loaded class when everything is fully loaded
-  window.addEventListener('load', function() {
-    document.body.classList.add('page-loaded');
-  });
-  
-  // Handle keyboard navigation for better accessibility
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Tab' || e.key === 'Shift' || e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-      document.documentElement.style.scrollBehavior = 'auto';
-      setTimeout(function() {
-        document.documentElement.style.scrollBehavior = 'smooth';
-      }, 1000);
-    }
-  });
-});
+})();
